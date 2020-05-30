@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "196382156275",
+    "firebase_url": "https://npgclocker-554e0.firebaseio.com",
+    "project_id": "npgclocker-554e0",
+    "storage_bucket": "npgclocker-554e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196382156275:android:8557609cc1b0f6d4c41e86",
+        "android_client_info": {
+          "package_name": "aryan.digipodium.npgclocker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196382156275-rabltk9tersc4kd6fvpgklc1va7g04qr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN_PwT1YF16uaSWRiV1HbbaLVdFguGKO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196382156275-rabltk9tersc4kd6fvpgklc1va7g04qr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196382156275:android:adba33ce7b0aef61c41e86",
+        "android_client_info": {
+          "package_name": "com.example.npgclocker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196382156275-rabltk9tersc4kd6fvpgklc1va7g04qr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN_PwT1YF16uaSWRiV1HbbaLVdFguGKO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196382156275-rabltk9tersc4kd6fvpgklc1va7g04qr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

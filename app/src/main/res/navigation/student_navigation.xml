@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/student_navigation"
+    app:startDestination="@id/stHomeFragment">
+    <fragment
+        android:id="@+id/stHomeFragment"
+        android:name="aryan.digipodium.npgclocker.ui.StHomeFragment"
+        android:label="st_home_fragment"
+        tools:layout="@layout/st_home_fragment" >
+        <action
+            android:id="@+id/action_stHomeFragment_to_stHistoryFragment"
+            app:destination="@id/stHistoryFragment" />
+        <action
+            android:id="@+id/action_stHomeFragment_to_stFolderFragment"
+            app:destination="@id/stFolderFragment" />
+        <action
+            android:id="@+id/action_stHomeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stHistoryFragment"
+        android:name="aryan.digipodium.npgclocker.ui.StHistoryFragment"
+        android:label="st_history_fragment"
+        tools:layout="@layout/st_history_fragment" >
+        <action
+            android:id="@+id/action_stHistoryFragment_to_stHomeFragment"
+            app:destination="@id/stHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="aryan.digipodium.npgclocker.ui.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_stHomeFragment"
+            app:destination="@id/stHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stFolderFragment"
+        android:name="aryan.digipodium.npgclocker.ui.StFolderFragment"
+        android:label="st_folder_fragment"
+        tools:layout="@layout/st_folder_fragment" >
+        <action
+            android:id="@+id/action_stFolderFragment_to_stHomeFragment"
+            app:destination="@id/stHomeFragment" />
+    </fragment>
+</navigation>

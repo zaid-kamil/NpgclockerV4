@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupStudentActivity">
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="408dp"
+        android:layout_height="271dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/NextBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/sign_in" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="227dp"
+        android:layout_height="156dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/NextBtn"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:background="#1435A0"
+        android:text="I'm already a User"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/request"
+        android:layout_width="113dp"
+        android:layout_height="46dp"
+        android:background="@drawable/border_btn"
+        android:text="Request"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toTopOf="@+id/NextBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dob"
+        app:layout_constraintVertical_bias="0.107" />
+
+    <EditText
+        android:id="@+id/mobile"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/input_border"
+        android:backgroundTint="#B9228FD9"
+        android:ems="10"
+        android:fontFamily="@font/bolditalic"
+        android:hint="Mobile Number"
+        android:inputType="phone"
+        android:maxLength="13"
+        android:textAlignment="center"
+        android:textColor="#0E0101"
+        android:textColorHint="@color/npgcblue"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/collegeid" />
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_border"
+        android:backgroundTint="#B9228FD9"
+        android:ems="10"
+        android:fontFamily="@font/bolditalic"
+        android:hint="Your Name"
+        android:inputType="textPersonName"
+        android:maxLength="20"
+        android:textAlignment="center"
+        android:textColor="#0E0101"
+        android:textColorHint="@color/npgcblue"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <EditText
+        android:id="@+id/dob"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_border"
+        android:backgroundTint="#B9228FD9"
+        android:ems="10"
+        android:fontFamily="@font/bolditalic"
+        android:hint="dd/mm/yyyy"
+        android:inputType="phone"
+        android:textAlignment="center"
+        android:textColor="#0E0101"
+        android:textColorHint="@color/npgcblue"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mobile" />
+
+    <EditText
+        android:id="@+id/collegeid"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/input_border"
+        android:backgroundTint="#B9228FD9"
+        android:ems="10"
+        android:fontFamily="@font/bolditalic"
+        android:hint="College ID"
+        android:inputType="phone"
+        android:maxLength="6"
+        android:textAlignment="center"
+        android:textColor="#0E0101"
+        android:textColorHint="@color/npgcblue"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userName" />
+</androidx.constraintlayout.widget.ConstraintLayout>

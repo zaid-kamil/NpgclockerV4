@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/faculty_navigation"
+    app:startDestination="@id/fcAprovalFragment">
+
+    <fragment
+        android:id="@+id/fcAprovalFragment"
+        android:name="aryan.digipodium.npgclocker.ui.FcApprovalFragment"
+        android:label="List of unapproved users"
+        tools:layout="@layout/fc_aproval_fragment">
+        <action
+            android:id="@+id/action_fcAprovalFragment_to_profileFragment"
+            app:destination="@id/profileFragment2" />
+        <action
+            android:id="@+id/action_fcAprovalFragment_to_fcUsersFragment"
+            app:destination="@id/fcUsersFragment" />
+        <action
+            android:id="@+id/action_fcAprovalFragment_to_fcHistoryFragment"
+            app:destination="@id/fcHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="aryan.digipodium.npgclocker.ui.ProfileFragment"
+        android:label="Faculty Profile"
+        tools:layout="@layout/profile_fragment">
+        <action
+            android:id="@+id/action_profileFragment2_to_fcAprovalFragment"
+            app:destination="@id/fcAprovalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fcHistoryFragment"
+        android:name="aryan.digipodium.npgclocker.ui.FcHistoryFragment"
+        android:label="History"
+        tools:layout="@layout/fc_history_fragment">
+        <action
+            android:id="@+id/action_fcHistoryFragment_to_fcAprovalFragment"
+            app:destination="@id/fcAprovalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fcUsersFragment"
+        android:name="aryan.digipodium.npgclocker.ui.FcUsersFragment"
+        android:label="Verified Users"
+        tools:layout="@layout/fc_users_fragment">
+        <action
+            android:id="@+id/action_fcUsersFragment_to_fcAprovalFragment"
+            app:destination="@id/fcAprovalFragment" />
+    </fragment>
+</navigation>

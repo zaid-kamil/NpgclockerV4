@@ -3,48 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/faculty_navigation"
-    app:startDestination="@id/fcAprovalFragment">
+    app:startDestination="@id/fc_home">
 
     <fragment
-        android:id="@+id/fcAprovalFragment"
+        android:id="@+id/fc_home"
         android:name="aryan.digipodium.npgclocker.ui.FcApprovalFragment"
         android:label="List of unapproved users"
         tools:layout="@layout/fc_aproval_fragment">
         <action
             android:id="@+id/action_fcAprovalFragment_to_profileFragment"
-            app:destination="@id/profileFragment2" />
+            app:destination="@id/fc_profile" />
         <action
             android:id="@+id/action_fcAprovalFragment_to_fcUsersFragment"
-            app:destination="@id/fcUsersFragment" />
+            app:destination="@id/fc_users" />
         <action
             android:id="@+id/action_fcAprovalFragment_to_fcHistoryFragment"
-            app:destination="@id/fcHistoryFragment" />
+            app:destination="@id/fc_history" />
     </fragment>
     <fragment
-        android:id="@+id/profileFragment2"
+        android:id="@+id/fc_profile"
         android:name="aryan.digipodium.npgclocker.ui.ProfileFragment"
         android:label="Faculty Profile"
         tools:layout="@layout/profile_fragment">
         <action
             android:id="@+id/action_profileFragment2_to_fcAprovalFragment"
-            app:destination="@id/fcAprovalFragment" />
+            app:destination="@id/fc_home" />
     </fragment>
     <fragment
-        android:id="@+id/fcHistoryFragment"
+        android:id="@+id/fc_history"
         android:name="aryan.digipodium.npgclocker.ui.FcHistoryFragment"
         android:label="History"
         tools:layout="@layout/fc_history_fragment">
         <action
             android:id="@+id/action_fcHistoryFragment_to_fcAprovalFragment"
-            app:destination="@id/fcAprovalFragment" />
+            app:destination="@id/fc_home" />
     </fragment>
     <fragment
-        android:id="@+id/fcUsersFragment"
+        android:id="@+id/fc_users"
         android:name="aryan.digipodium.npgclocker.ui.FcUsersFragment"
         android:label="Verified Users"
         tools:layout="@layout/fc_users_fragment">
         <action
             android:id="@+id/action_fcUsersFragment_to_fcAprovalFragment"
-            app:destination="@id/fcAprovalFragment" />
+            app:destination="@id/fc_home" />
     </fragment>
 </navigation>

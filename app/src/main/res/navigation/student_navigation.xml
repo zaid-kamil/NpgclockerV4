@@ -3,47 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/student_navigation"
-    app:startDestination="@id/stHomeFragment">
+    app:startDestination="@id/st_home">
     <fragment
-        android:id="@+id/stHomeFragment"
+        android:id="@+id/st_home"
         android:name="aryan.digipodium.npgclocker.ui.StHomeFragment"
-        android:label="st_home_fragment"
-        tools:layout="@layout/st_home_fragment" >
+        android:label="Home"
+        tools:layout="@layout/st_home_fragment">
         <action
             android:id="@+id/action_stHomeFragment_to_stHistoryFragment"
-            app:destination="@id/stHistoryFragment" />
+            app:destination="@id/st_history" />
         <action
             android:id="@+id/action_stHomeFragment_to_stFolderFragment"
-            app:destination="@id/stFolderFragment" />
+            app:destination="@id/st_folders" />
         <action
             android:id="@+id/action_stHomeFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/st_profile" />
     </fragment>
     <fragment
-        android:id="@+id/stHistoryFragment"
+        android:id="@+id/st_history"
         android:name="aryan.digipodium.npgclocker.ui.StHistoryFragment"
-        android:label="st_history_fragment"
-        tools:layout="@layout/st_history_fragment" >
+        android:label="History"
+        tools:layout="@layout/st_history_fragment">
         <action
             android:id="@+id/action_stHistoryFragment_to_stHomeFragment"
-            app:destination="@id/stHomeFragment" />
+            app:destination="@id/st_home" />
     </fragment>
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/st_profile"
         android:name="aryan.digipodium.npgclocker.ui.ProfileFragment"
-        android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment" >
+        android:label="Profile"
+        tools:layout="@layout/profile_fragment">
         <action
             android:id="@+id/action_profileFragment_to_stHomeFragment"
-            app:destination="@id/stHomeFragment" />
+            app:destination="@id/st_home" />
     </fragment>
     <fragment
-        android:id="@+id/stFolderFragment"
+        android:id="@+id/st_folders"
         android:name="aryan.digipodium.npgclocker.ui.StFolderFragment"
-        android:label="st_folder_fragment"
-        tools:layout="@layout/st_folder_fragment" >
+        android:label="Folders"
+        tools:layout="@layout/st_folder_fragment">
         <action
             android:id="@+id/action_stFolderFragment_to_stHomeFragment"
-            app:destination="@id/stHomeFragment" />
+            app:destination="@id/st_home" />
     </fragment>
 </navigation>

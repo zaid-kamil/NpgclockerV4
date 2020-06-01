@@ -42,6 +42,7 @@ public class LoginFacultyActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
+                                Helper.setUserType(LoginFacultyActivity.this,0);
                                 updateUI(user);
                             } else {
                                 Toast.makeText(LoginFacultyActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();

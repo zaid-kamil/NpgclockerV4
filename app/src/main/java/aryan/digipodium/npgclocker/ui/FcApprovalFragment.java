@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +24,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import aryan.digipodium.npgclocker.R;
 import aryan.digipodium.npgclocker.models.StudentModel;
+import aryan.digipodium.npgclocker.models.StudentVerfied;
 
 public class FcApprovalFragment extends Fragment {
 
@@ -59,10 +64,11 @@ public class FcApprovalFragment extends Fragment {
         bar = view.findViewById(R.id.bar);
         unapprovedStudentRecycler = view.findViewById(R.id.unapprovedStudentRecycler);
         unapprovedStudentRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        FirebaseFirestore.getInstance().collection("students").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        FirebaseFirestore.getInstance().collection("students").whereEqualTo("approved", false).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 List<DocumentSnapshot> documents = queryDocumentSnapshots.getDocuments();
+                unapprovedList.clear();
                 for (DocumentSnapshot document : documents) {
                     StudentModel model = document.toObject(StudentModel.class);
                     if (model != null && !model.approved) {
@@ -105,12 +111,6 @@ public class FcApprovalFragment extends Fragment {
             holder.card.setTag(model);
             holder.stdName.setText(model.username);
             holder.collegeId.setText(model.collegeid);
-        }
-
-        public void updateList(List<StudentModel> list) {
-            this.list.clear();
-            this.list = list;
-            notifyDataSetChanged();
         }
 
         @Override
@@ -160,6 +160,17 @@ public class FcApprovalFragment extends Fragment {
                         pb.setVisibility(View.VISIBLE);
                         StudentModel model = (StudentModel) card.getTag();
                         String documentId = model.collegeid;
+                        String password = getUniquePassword(5);
+                        password += model.mobile.substring(5);
+                        sendSMS(model.mobile, "the admin have verified & approved your access to NPGC locker app. please open the app using your password\n" + password);
+                        FirebaseFirestore.getInstance().collection("students_verified").document(documentId).set(new StudentVerfied(documentId, model.mobile, password)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(context, "sms sent", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                         FirebaseFirestore.getInstance().collection("students").document(documentId).update("approved", true).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -175,6 +186,44 @@ public class FcApprovalFragment extends Fragment {
                     }
                 });
             }
+
+            public void sendSMS(String phoneNo, String msg) {
+                try {
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(phoneNo, null, msg, null, null);
+                    Toast.makeText(context, "Message Sent", Toast.LENGTH_LONG).show();
+                } catch (Exception ex) {
+                    Toast.makeText(context, ex.getMessage().toString(), Toast.LENGTH_LONG).show();
+                    ex.printStackTrace();
+                }
+            }
+
+            public String getUniquePassword(int n) {
+
+                // chose a Character random from this String
+                String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        + "0123456789"
+                        + "abcdefghijklmnopqrstuvxyz";
+
+                // create StringBuffer size of AlphaNumericString
+                StringBuilder sb = new StringBuilder(n);
+
+                for (int i = 0; i < n; i++) {
+
+                    // generate a random number between
+                    // 0 to AlphaNumericString variable length
+                    int index
+                            = (int) (AlphaNumericString.length()
+                            * Math.random());
+
+                    // add Character one by one in end of sb
+                    sb.append(AlphaNumericString
+                            .charAt(index));
+                }
+
+                return sb.toString();
+            }
         }
     }
+
 }

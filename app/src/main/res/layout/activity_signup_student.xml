@@ -58,7 +58,7 @@
         android:background="@drawable/input_border"
         android:backgroundTint="#B9228FD9"
         android:ems="10"
-        android:fontFamily="@font/bolditalic"
+        
         android:hint="Mobile Number"
         android:inputType="phone"
         android:maxLength="13"
@@ -78,7 +78,7 @@
         android:background="@drawable/input_border"
         android:backgroundTint="#B9228FD9"
         android:ems="10"
-        android:fontFamily="@font/bolditalic"
+        android:fontFamily="bolditalic"
         android:hint="Your Name"
         android:inputType="textPersonName"
         android:maxLength="20"
@@ -98,7 +98,7 @@
         android:background="@drawable/input_border"
         android:backgroundTint="#B9228FD9"
         android:ems="10"
-        android:fontFamily="@font/bolditalic"
+        
         android:hint="dd/mm/yyyy"
         android:inputType="phone"
         android:textAlignment="center"
@@ -117,7 +117,7 @@
         android:background="@drawable/input_border"
         android:backgroundTint="#B9228FD9"
         android:ems="10"
-        android:fontFamily="@font/bolditalic"
+        
         android:hint="College ID"
         android:inputType="phone"
         android:maxLength="6"

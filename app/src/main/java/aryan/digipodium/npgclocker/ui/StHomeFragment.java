@@ -91,7 +91,9 @@ public class StHomeFragment extends Fragment {
                 folderList.clear();
                 if (task.isSuccessful()) {
                     for (DocumentSnapshot document : task.getResult().getDocuments()) {
-                        folderList.add(document.toObject(FolderModel.class));
+                        if (document.getId().contains(Helper.getStudentId(getActivity()))) {
+                            folderList.add(document.toObject(FolderModel.class));
+                        }
                     }
                     final ArrayAdapter<FolderModel> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, folderList);
                     adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -99,7 +101,6 @@ public class StHomeFragment extends Fragment {
                 }
             }
         });
-
 
         imgSelect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +132,7 @@ public class StHomeFragment extends Fragment {
                     String folderName = folderList.get(pos).name;
 
                     final String ext = getFileExtention(fullPhotoUri);
-                    final String fullFilename = filename +"."+ ext;
+                    final String fullFilename = filename + "." + ext;
                     final StorageReference fileRef = storage.child(folderName).child(fullFilename);
                     fileRef.putFile(fullPhotoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override

@@ -91,7 +91,7 @@ public class StHomeFragment extends Fragment {
                 folderList.clear();
                 if (task.isSuccessful()) {
                     for (DocumentSnapshot document : task.getResult().getDocuments()) {
-                        if (document.getId().contains(Helper.getStudentId(getActivity()))) {
+                        if (document.getId().contains(Helper.getStudentId(getActivity())) || document.getId().contains("common")) {
                             folderList.add(document.toObject(FolderModel.class));
                         }
                     }

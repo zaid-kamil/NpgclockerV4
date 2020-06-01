@@ -72,7 +72,7 @@ public class StFolderFragment extends Fragment {
             public void onClick(View v) {
                 pb.setVisibility(View.VISIBLE);
                 String name = editNewFolder.getText().toString();
-                folderRef.document(Helper.getStudentId(getActivity())  + name).set(new FolderModel(name)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                folderRef.document(Helper.getStudentId(getActivity()) + name).set(new FolderModel(name)).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
@@ -87,20 +87,18 @@ public class StFolderFragment extends Fragment {
             }
         });
         folderList = new ArrayList<>();
-        folderRv.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        folderRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        folderRv.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        folderRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                if(e==null) {
-                    folderList.clear();
-                    for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
-                        if(document.getId().equals(Helper.getStudentId(getActivity()))){
-                            folderList.add(document.toObject(FolderModel.class));
-                        }
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                folderList.clear();
+                for (DocumentSnapshot document : task.getResult().getDocuments()) {
+                    if (document.getId().contains(Helper.getStudentId(getActivity())) || document.getId().contains("common")) {
+                        folderList.add(document.toObject(FolderModel.class));
                     }
-                    FolderAdapter adapter = new FolderAdapter(getContext(), R.layout.row_folders, folderList);
-                    folderRv.setAdapter(adapter);
                 }
+                FolderAdapter adapter = new FolderAdapter(getContext(), R.layout.row_folders, folderList);
+                folderRv.setAdapter(adapter);
             }
         });
 

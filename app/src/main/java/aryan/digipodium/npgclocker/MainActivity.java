@@ -2,24 +2,23 @@ package aryan.digipodium.npgclocker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.Menu;
-
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,49 +62,15 @@ public class MainActivity extends AppCompatActivity {
         mAppBarConfiguration = new AppBarConfiguration.Builder(top_levels).setDrawerLayout(drawer).build();
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.st_home:
-                    case R.id.fc_home:
-                        navController.navigateUp();
-                        break;
-                    case R.id.fc_history:
-                        navController.navigate(R.id.action_fcAprovalFragment_to_fcHistoryFragment);
-                        break;
-                    case R.id.fc_profile:
-                        navController.navigate(R.id.action_fcAprovalFragment_to_profileFragment);
-                        break;
-                    case R.id.fc_users:
-                        navController.navigate(R.id.action_fcAprovalFragment_to_fcUsersFragment);
-                        break;
-                    case R.id.st_profile:
-                        navController.navigate(R.id.action_stHomeFragment_to_profileFragment);
-                        break;
-                    case R.id.st_folders:
-                        navController.navigate(R.id.action_stHomeFragment_to_stFolderFragment);
-                        break;
-                    case R.id.st_history:
-                        navController.navigate(R.id.action_stHomeFragment_to_stHistoryFragment);
-                        break;
-                    case R.id.fc_logout:
-                    case R.id.st_logout:
-                        exec_logout();
-                        break;
-                }
-                drawer.closeDrawer(GravityCompat.START);
-                return true;
-            }
-        });
+
 
     }
 
     private void exec_logout() {
         Helper.clearUserType(this);
         mAuth.signOut();
-        Intent i = new Intent(this,ChoiceActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Intent i = new Intent(this, ChoiceActivity.class);
+        finish();
         startActivity(i);
 
     }
@@ -114,6 +79,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_logout) {
+            exec_logout();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

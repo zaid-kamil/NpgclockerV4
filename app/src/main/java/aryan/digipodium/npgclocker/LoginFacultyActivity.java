@@ -1,14 +1,14 @@
 package aryan.digipodium.npgclocker;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -42,7 +42,7 @@ public class LoginFacultyActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Helper.setUserType(LoginFacultyActivity.this,0);
+                                Helper.setUserType(LoginFacultyActivity.this, 0);
                                 updateUI(user);
                             } else {
                                 Toast.makeText(LoginFacultyActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();

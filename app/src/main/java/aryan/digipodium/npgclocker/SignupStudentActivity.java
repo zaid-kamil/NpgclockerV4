@@ -1,14 +1,14 @@
 package aryan.digipodium.npgclocker;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -19,15 +19,13 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.regex.Pattern;
-
 import aryan.digipodium.npgclocker.models.StudentModel;
 
 public class SignupStudentActivity extends AppCompatActivity {
 
     public static final String STUDENTS = "students";
-    private Button nextBtn;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private Button nextBtn;
     private boolean collegeidExists;
     private Button request;
     private EditText editMobile;
@@ -118,7 +116,7 @@ public class SignupStudentActivity extends AppCompatActivity {
     }
 
     private boolean isValidMobile(String phone) {
-        if (phone.length()>=10 && phone.length() <=13){
+        if (phone.length() >= 10 && phone.length() <= 13) {
             return true;
         }
         return false;

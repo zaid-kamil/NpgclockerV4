@@ -9,9 +9,9 @@
 
     <TextView
         android:id="@+id/header"
+        style="@style/fragment_heading"
         android:text="History of Users"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/fragment_heading" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

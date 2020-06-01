@@ -1,27 +1,20 @@
 package aryan.digipodium.npgclocker.ui;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.telephony.SmsManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,9 +23,7 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -41,8 +32,6 @@ import java.util.List;
 import aryan.digipodium.npgclocker.Helper;
 import aryan.digipodium.npgclocker.R;
 import aryan.digipodium.npgclocker.models.FolderModel;
-import aryan.digipodium.npgclocker.models.StudentModel;
-import aryan.digipodium.npgclocker.models.StudentVerfied;
 
 public class StFolderFragment extends Fragment {
 
@@ -129,6 +118,7 @@ public class StFolderFragment extends Fragment {
         public void onBindViewHolder(@NonNull Holder holder, int position) {
             FolderModel model = list.get(position);
             holder.textFolder.setText(model.name);
+            holder.card.setTag(model);
         }
 
         @Override
@@ -138,10 +128,21 @@ public class StFolderFragment extends Fragment {
 
         public class Holder extends RecyclerView.ViewHolder {
             TextView textFolder;
+            View card;
 
             public Holder(@NonNull View v) {
                 super(v);
                 textFolder = v.findViewById(R.id.textFolder);
+                card = v.findViewById(R.id.card);
+                card.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FolderModel model = (FolderModel) v.getTag();
+                        StFolderFragmentDirections.ActionStFoldersToStHistory action = StFolderFragmentDirections.actionStFoldersToStHistory();
+                        action.setName(model.name);
+                        Navigation.findNavController(v).navigate(action);
+                    }
+                });
             }
         }
     }

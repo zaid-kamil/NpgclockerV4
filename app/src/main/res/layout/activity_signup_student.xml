@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignupStudentActivity">
+
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="408dp"
@@ -58,7 +59,7 @@
         android:background="@drawable/input_border"
         android:backgroundTint="#B9228FD9"
         android:ems="10"
-        
+
         android:hint="Mobile Number"
         android:inputType="phone"
         android:maxLength="13"
@@ -98,7 +99,7 @@
         android:background="@drawable/input_border"
         android:backgroundTint="#B9228FD9"
         android:ems="10"
-        
+
         android:hint="dd/mm/yyyy"
         android:inputType="phone"
         android:textAlignment="center"
@@ -117,7 +118,7 @@
         android:background="@drawable/input_border"
         android:backgroundTint="#B9228FD9"
         android:ems="10"
-        
+
         android:hint="College ID"
         android:inputType="phone"
         android:maxLength="6"

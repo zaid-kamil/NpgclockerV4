@@ -13,20 +13,27 @@
             android:id="@+id/action_stHomeFragment_to_stHistoryFragment"
             app:destination="@id/st_history" />
         <action
-            android:id="@+id/action_stHomeFragment_to_stFolderFragment"
-            app:destination="@id/st_folders" />
-        <action
             android:id="@+id/action_stHomeFragment_to_profileFragment"
             app:destination="@id/st_profile" />
+        <action
+            android:id="@+id/action_st_home_to_st_folders"
+            app:destination="@id/st_folders" />
     </fragment>
     <fragment
         android:id="@+id/st_history"
         android:name="aryan.digipodium.npgclocker.ui.StHistoryFragment"
-        android:label="History"
+        android:label="All Document"
         tools:layout="@layout/st_history_fragment">
         <action
             android:id="@+id/action_stHistoryFragment_to_stHomeFragment"
             app:destination="@id/st_home" />
+        <argument
+            android:name="name"
+            android:defaultValue="na"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_st_history_to_st_folders"
+            app:destination="@id/st_folders" />
     </fragment>
     <fragment
         android:id="@+id/st_profile"
@@ -45,5 +52,8 @@
         <action
             android:id="@+id/action_stFolderFragment_to_stHomeFragment"
             app:destination="@id/st_home" />
+        <action
+            android:id="@+id/action_st_folders_to_st_history"
+            app:destination="@id/st_history" />
     </fragment>
 </navigation>

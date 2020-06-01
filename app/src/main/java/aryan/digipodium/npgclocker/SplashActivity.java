@@ -1,8 +1,5 @@
 package aryan.digipodium.npgclocker;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +9,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -54,8 +54,8 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
                 if (EasyPermissions.hasPermissions(SplashActivity.this, permissions)) {
                     Intent intent = new Intent(SplashActivity.this, ChoiceActivity.class);
                     startActivity(intent);
-                }else{
-                    EasyPermissions.requestPermissions(SplashActivity.this,"please allow permissions",892,permissions);
+                } else {
+                    EasyPermissions.requestPermissions(SplashActivity.this, "please allow permissions", 892, permissions);
                 }
             }
         });
@@ -63,7 +63,7 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
     @Override

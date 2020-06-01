@@ -1,14 +1,14 @@
 package aryan.digipodium.npgclocker;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -67,7 +67,7 @@ public class LoginStudentActivity extends AppCompatActivity {
     }
 
     public void gotoHome() {
-        Helper.setUserType(this,1);
+        Helper.setUserType(this, 1);
         Intent intent = new Intent(LoginStudentActivity.this, MainActivity.class);
         startActivity(intent);
     }

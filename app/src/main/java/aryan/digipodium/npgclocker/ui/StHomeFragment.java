@@ -1,7 +1,6 @@
 package aryan.digipodium.npgclocker.ui;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,7 +32,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -129,7 +127,7 @@ public class StHomeFragment extends Fragment {
                 String filename = editFile.getText().toString();
                 if (isFileSelected && isFolderSelected && filename.length() > 0) {
                     int pos = spFolder.getSelectedItemPosition();
-                    String folderName = folderList.get(pos).name;
+                    final String folderName = folderList.get(pos).name;
 
                     final String ext = getFileExtention(fullPhotoUri);
                     final String fullFilename = filename + "." + ext;
@@ -140,7 +138,7 @@ public class StHomeFragment extends Fragment {
                             fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    Document data = new Document(fullFilename, uri.toString(), ext, Helper.getStudentId(getActivity()));
+                                    Document data = new Document(fullFilename, uri.toString(), ext, Helper.getStudentId(getActivity()), folderName);
                                     FirebaseFirestore.getInstance().collection("files").document().set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {

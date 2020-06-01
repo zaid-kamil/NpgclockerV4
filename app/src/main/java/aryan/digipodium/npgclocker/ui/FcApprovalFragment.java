@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -60,7 +62,26 @@ public class FcApprovalFragment extends Fragment {
         bar = view.findViewById(R.id.bar);
         unapprovedStudentRecycler = view.findViewById(R.id.unapprovedStudentRecycler);
         unapprovedStudentRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        FirebaseFirestore.getInstance().collection("students").whereEqualTo("approved", false).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        final CollectionReference db = FirebaseFirestore.getInstance().collection("students");
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bar.setVisibility(View.VISIBLE);
+                db.whereEqualTo("approved", false).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e == null) {
+                            for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                                db.document(document.getId()).delete();
+                            }
+                            bar.setVisibility(View.GONE);
+                        }
+                    }
+                });
+            }
+        });
+        db.whereEqualTo("approved", false).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 List<DocumentSnapshot> documents = queryDocumentSnapshots.getDocuments();

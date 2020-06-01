@@ -1,13 +1,20 @@
 package aryan.digipodium.npgclocker.ui;
 
+import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,15 +43,27 @@ public class StHistoryFragment extends Fragment {
     private CollectionReference dbRef;
     private ArrayList<Document> filesList;
     private ProgressBar pb;
+    private long downloadId;
 
     public static StHistoryFragment newInstance() {
         return new StHistoryFragment();
     }
 
+    private BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+            if (downloadId == id) {
+                Toast.makeText(getActivity(), "Download Completed", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         dbRef = FirebaseFirestore.getInstance().collection("files");
+        getActivity().registerReceiver(onDownloadComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         return inflater.inflate(R.layout.st_history_fragment, container, false);
     }
 
@@ -94,12 +114,32 @@ public class StHistoryFragment extends Fragment {
     }
 
     private void deleteDocument(Document doc) {
-
+        dbRef.whereEqualTo("filename", doc.filename).whereEqualTo("uploaderid", Helper.getStudentId(getActivity())).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if (e == null) {
+                    for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                        String id = document.getId();
+                        dbRef.document(id).delete();
+                    }
+                }
+            }
+        });
     }
 
     private void downloadDocument(Document doc) {
-
+        File file = new File(getActivity().getExternalFilesDir(null), doc.filename);
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(doc.fileurl))
+                .setTitle(doc.filename)
+                .setDescription("downloading please wait...")
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "npgc_locker")
+                .setAllowedOverMetered(true).
+                        setAllowedOverRoaming(true);
+        DownloadManager service = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+        downloadId = service.enqueue(request);
     }
+
 
     private class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.Holder> {
 
@@ -162,5 +202,11 @@ public class StHistoryFragment extends Fragment {
                 });
             }
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getActivity().unregisterReceiver(onDownloadComplete);
     }
 }
